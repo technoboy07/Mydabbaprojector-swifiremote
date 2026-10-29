@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 320x180 leanback launcher banner. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp" android:height="180dp"
+    android:viewportWidth="320" android:viewportHeight="180">
+    <path android:fillColor="#FF121417" android:pathData="M0,0h320v180h-320z" />
+    <path android:fillColor="#FF1C2026" android:pathData="M40,40h100v100h-100z" />
+    <path android:fillColor="#FF5EC8FF" android:pathData="M90,52l12,14h-24z M90,128l-12,-14h24z M52,90l14,-12v24z M128,90l-14,12v-24z" />
+    <path android:fillColor="#FFE9EDF2" android:pathData="M90,76a14,14 0,1 1,0 28a14,14 0,1 1,0 -28z" />
+    <path android:fillColor="#FFE9EDF2" android:pathData="M165,70h120v14h-120z M165,96h90v10h-90z" />
+</vector>

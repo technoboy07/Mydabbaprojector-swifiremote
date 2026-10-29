@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#121417">
+  <meta name="referrer" content="no-referrer">
+  <title>M2 Remote</title>
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-up" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></symbol>
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 010 11H11"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9v11h14V9"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-vol-up" viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13"/></symbol>
+  <symbol id="i-vol-down" viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 010 7"/></symbol>
+  <symbol id="i-mute" viewBox="0 0 24 24"><path d="M11 5L6 9H3v6h3l5 4z"/><path d="M16 9l6 6M22 9l-6 6"/></symbol>
+  <symbol id="i-prev" viewBox="0 0 24 24"><path d="M6 5v14"/><path d="M19 5l-10 7 10 7z"/></symbol>
+  <symbol id="i-next" viewBox="0 0 24 24"><path d="M18 5v14"/><path d="M5 5l10 7-10 7z"/></symbol>
+  <symbol id="i-playpause" viewBox="0 0 24 24"><path d="M4 5l9 7-9 7z"/><path d="M16 5v14M20 5v14"/></symbol>
+  <symbol id="i-keyboard" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></symbol>
+  <symbol id="i-more" viewBox="0 0 24 24"><path d="M12 5h.01M12 12h.01M12 19h.01"/></symbol>
+  <symbol id="i-dpad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-touch" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="14" rx="3"/><path d="M9 21h6"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="brand">M2 Remote</div>
+  <button id="status-pill" class="pill" type="button" aria-live="polite">
+    <span class="dot"></span><span id="status-text">Connecting…</span>
+  </button>
+  <button id="open-settings" class="icon-btn" type="button" aria-label="Settings" hidden>
+    <svg><use href="#i-more"/></svg>
+  </button>
+</header>
+
+<!-- Pairing ----------------------------------------------------------------------------- -->
+<main id="pair-view" class="view" hidden>
+  <section class="card pair-card">
+    <h1>Pair this phone</h1>
+    <p class="muted">Open <b>M2 Smart Remote</b> on the projector. Scan its QR code with your camera, or type the 16-character code shown on the projector screen.</p>
+    <form id="pair-form" autocomplete="off">
+      <label for="pair-code" class="sr-only">Pairing code</label>
+      <input id="pair-code" class="code-input" inputmode="text" autocapitalize="characters"
+             autocomplete="off" autocorrect="off" spellcheck="false" maxlength="19"
+             placeholder="XXXX-XXXX-XXXX-XXXX">
+      <label class="check">
+        <input id="pair-remember" type="checkbox">
+        <span>Remember this phone after the tab is closed</span>
+      </label>
+      <button id="pair-submit" class="primary" type="submit">Pair</button>
+      <p id="pair-error" class="error" role="alert"></p>
+    </form>
+  </section>
+</main>
+
+<!-- Remote ------------------------------------------------------------------------------ -->
+<main id="remote-view" class="view" hidden>
+  <div id="a11y-banner" class="banner" hidden>
+    Accessibility service is off on the projector. D-pad, Back, Home, touchpad and text need it.
+    Volume and media keys still work.
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <button id="tab-dpad" class="tab" role="tab" type="button" aria-selected="true">
+      <svg><use href="#i-dpad"/></svg>D-pad
+    </button>
+    <button id="tab-touch" class="tab" role="tab" type="button" aria-selected="false">
+      <svg><use href="#i-touch"/></svg>Touchpad
+    </button>
+  </nav>
+
+  <section id="panel-dpad" class="panel" role="tabpanel">
+    <div class="dpad">
+      <button class="dir up" data-cmd="UP" data-repeat type="button" aria-label="Up"><svg><use href="#i-up"/></svg></button>
+      <button class="dir left" data-cmd="LEFT" data-repeat type="button" aria-label="Left"><svg><use href="#i-left"/></svg></button>
+      <button class="ok" data-cmd="OK" type="button" aria-label="OK">OK</button>
+      <button class="dir right" data-cmd="RIGHT" data-repeat type="button" aria-label="Right"><svg><use href="#i-right"/></svg></button>
+      <button class="dir down" data-cmd="DOWN" data-repeat type="button" aria-label="Down"><svg><use href="#i-down"/></svg></button>
+    </div>
+    <div class="row3">
+      <button class="round" data-cmd="BACK" type="button"><svg><use href="#i-back"/></svg><span>Back</span></button>
+      <button class="round" data-cmd="HOME" type="button"><svg><use href="#i-home"/></svg><span>Home</span></button>
+      <button class="round" data-cmd="MENU" type="button" title="Long-presses the selected item. This projector has no injectable Menu key.">
+        <svg><use href="#i-menu"/></svg><span>Options</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="panel-touch" class="panel" role="tabpanel" hidden>
+    <div class="pad-wrap">
+      <div id="touchpad" class="touchpad" aria-label="Touchpad">
+        <div class="pad-hint">Move: 1 finger · Tap: click · Hold: long-press · Scroll: 2 fingers</div>
+      </div>
+      <div id="scroll-strip" class="scroll-strip" aria-label="Scroll strip"><span></span><span></span><span></span></div>
+    </div>
+    <p id="gesture-note" class="note" hidden>This projector does not allow gesture injection, so taps and scrolling are unavailable. Pointer movement still shows the cursor.</p>
+    <div class="row3">
+      <button class="round" data-cmd="BACK" type="button"><svg><use href="#i-back"/></svg><span>Back</span></button>
+      <button class="round" id="btn-click" type="button"><span class="big">Click</span></button>
+      <button class="round" data-cmd="HOME" type="button"><svg><use href="#i-home"/></svg><span>Home</span></button>
+    </div>
+  </section>
+
+  <footer class="dock">
+    <div class="dock-row">
+      <div class="rocker">
+        <button data-cmd="VOLUME_DOWN" data-repeat type="button" aria-label="Volume down"><svg><use href="#i-vol-down"/></svg></button>
+        <button data-cmd="MUTE" type="button" aria-label="Mute"><svg><use href="#i-mute"/></svg></button>
+        <button data-cmd="VOLUME_UP" data-repeat type="button" aria-label="Volume up"><svg><use href="#i-vol-up"/></svg></button>
+      </div>
+      <button id="open-keyboard" class="icon-btn solid" type="button" aria-label="Type text"><svg><use href="#i-keyboard"/></svg></button>
+    </div>
+    <div class="dock-row media">
+      <button data-cmd="MEDIA_PREVIOUS" type="button" aria-label="Previous"><svg><use href="#i-prev"/></svg></button>
+      <button data-cmd="MEDIA_PLAY_PAUSE" type="button" aria-label="Play or pause" class="wide"><svg><use href="#i-playpause"/></svg></button>
+      <button data-cmd="MEDIA_NEXT" type="button" aria-label="Next"><svg><use href="#i-next"/></svg></button>
+    </div>
+  </footer>
+</main>
+
+<!-- Keyboard sheet ---------------------------------------------------------------------- -->
+<div id="keyboard-sheet" class="sheet" hidden>
+  <div class="sheet-head">
+    <span>Send text to the selected field</span>
+    <button id="close-keyboard" class="icon-btn" type="button" aria-label="Close"><svg><use href="#i-close"/></svg></button>
+  </div>
+  <form id="text-form" autocomplete="off">
+    <input id="text-input" type="text" maxlength="500" enterkeyhint="send" autocomplete="off"
+           placeholder="Search or URL">
+    <button class="primary" type="submit">Send</button>
+  </form>
+  <div class="sheet-row">
+    <label class="check"><input id="live-typing" type="checkbox"><span>Live typing</span></label>
+    <button id="clear-text" class="link" type="button">Clear projector field</button>
+  </div>
+  <p class="muted small">Replaces the text in the projector's focused text box. Works in standard Android text fields; some apps (games, many web/video apps) ignore it. Press OK on the projector's search button afterwards — there is no injectable Enter key.</p>
+</div>
+
+<!-- Settings sheet ---------------------------------------------------------------------- -->
+<div id="settings-sheet" class="sheet" hidden>
+  <div class="sheet-head">
+    <span>Remote settings</span>
+    <button id="close-settings" class="icon-btn" type="button" aria-label="Close"><svg><use href="#i-close"/></svg></button>
+  </div>
+  <label class="slider">Pointer speed <output id="sens-out"></output>
+    <input id="sens" type="range" min="0.5" max="4" step="0.1">
+  </label>
+  <label class="slider">Scroll speed <output id="scroll-out"></output>
+    <input id="scroll-speed" type="range" min="0.5" max="4" step="0.1">
+  </label>
+  <label class="check"><input id="opt-tap" type="checkbox"><span>Tap touchpad to click</span></label>
+  <label class="check"><input id="opt-double" type="checkbox"><span>Detect double-tap (adds a short delay to single taps)</span></label>
+  <label class="check"><input id="opt-haptics" type="checkbox"><span>Vibrate on press</span></label>
+  <div class="danger-zone">
+    <button id="btn-disconnect" class="secondary" type="button">Disconnect this phone</button>
+    <button id="btn-stop" class="danger" type="button">Stop server on projector</button>
+  </div>
+  <p class="muted small">Security: this page talks to the projector over plain HTTP on your local network. Every command is signed with a key that was never sent over the network, so it cannot be forged or replayed, but other devices on the same Wi-Fi can see which buttons you press and any text you send. Don't send passwords.</p>
+</div>
+
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script src="crypto.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

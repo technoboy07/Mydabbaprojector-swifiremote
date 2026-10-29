@@ -1,0 +1,10 @@
+{
+  "name": "M2 Smart Remote",
+  "short_name": "M2 Remote",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#121417",
+  "theme_color": "#121417",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

@@ -1,0 +1,5 @@
+// Pinned toolchain (see docs/BUILD.md):
+//   JDK 17, Gradle 8.14.3 (wrapper), Android Gradle Plugin 8.12.0, compileSdk 36.
+plugins {
+    id 'com.android.application' version '8.12.0' apply false
+}

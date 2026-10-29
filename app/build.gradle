@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Optional release signing: create keystore.properties (never commit it) with
+// storeFile, storePassword, keyAlias, keyPassword. See docs/BUILD.md.
+def keystorePropsFile = rootProject.file('keystore.properties')
+def keystoreProps = new Properties()
+if (keystorePropsFile.exists()) {
+    keystorePropsFile.withInputStream { keystoreProps.load(it) }
+}
+
+android {
+    namespace 'com.m2smartremote'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'com.m2smartremote'
+        // dispatchGesture() (touchpad taps/scrolls) needs API 24; the projector is API 25.
+        minSdk 24
+        // Target the projector's own platform level so runtime behaviour matches it exactly.
+        targetSdk 25
+        versionCode 1
+        versionName '1.0.0'
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePropsFile.exists()) {
+                storeFile rootProject.file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (keystorePropsFile.exists()) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        // targetSdk 25 is deliberate: this APK is sideloaded onto an API 25 device, never published.
+        disable 'ExpiredTargetSdkVersion', 'OldTargetApi'
+        abortOnError true
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = false
+    }
+}
+
+dependencies {
+    // Pure-Java, Java 6 compatible embedded HTTP server (no native code, ~70 KB).
+    implementation 'org.nanohttpd:nanohttpd:2.3.1'
+    // Pure-Java QR encoder. 3.3.3 is the last release built for Java 7 / old Android.
+    implementation 'com.google.zxing:core:3.3.3'
+
+    testImplementation 'junit:junit:4.13.2'
+    // Android's org.json is a stub in JVM unit tests; use the reference implementation there.
+    testImplementation 'org.json:json:20240303'
+}

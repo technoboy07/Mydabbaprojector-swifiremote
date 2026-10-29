@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">M2 Smart Remote</string>
+    <string name="settings">Remote settings</string>
+    <string name="accessibility_label">M2 Smart Remote</string>
+    <string name="accessibility_description">Lets a phone that you paired with M2 Smart Remote move focus, select items, go Back/Home, tap and scroll, and type into text fields on this projector. It acts only when a paired phone sends a command, and it does not read out or send screen content anywhere.</string>
+    <string name="start_server">Start remote server</string>
+    <string name="stop_server">Stop remote server</string>
+    <string name="enable_accessibility">Enable accessibility service</string>
+    <string name="accessibility_settings">Accessibility settings</string>
+    <string name="open_settings">Settings</string>
+    <string name="revoke_all">Disconnect all phones</string>
+    <string name="label_server">Server</string>
+    <string name="label_address">Address</string>
+    <string name="label_accessibility">Accessibility</string>
+    <string name="label_sessions">Paired phones</string>
+    <string name="pair_title">Pair a phone</string>
+    <string name="security_notice">Security: the remote works only on your local network and only for phones you pair with this screen. Traffic is plain HTTP. Commands are signed so they cannot be forged or replayed, but someone on the same Wi-Fi could see which buttons you press. Use it only on a network you trust.</string>
+    <string name="port_label">Port (1024–65535)</string>
+    <string name="save_port">Save port</string>
+    <string name="start_on_boot">Start the remote server when the projector boots</string>
+    <string name="show_highlight">Show a highlight around the selected item</string>
+    <string name="rotate_code">Generate a new pairing code</string>
+    <string name="paired_phones">Paired phones</string>
+</resources>

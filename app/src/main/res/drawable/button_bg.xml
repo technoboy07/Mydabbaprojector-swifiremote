@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A thick bright border on focus so the selection is obvious from across the room. -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <solid android:color="#FF2F6E8F" />
+            <stroke android:width="3dp" android:color="@color/accent" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <solid android:color="#FF263B4A" />
+            <stroke android:width="3dp" android:color="@color/accent" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp" />
+            <solid android:color="@color/surface" />
+            <stroke android:width="1dp" android:color="#FF2C323B" />
+        </shape>
+    </item>
+</selector>

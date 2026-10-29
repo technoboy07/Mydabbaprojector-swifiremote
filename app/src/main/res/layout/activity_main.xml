@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="32dp">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textColor="@color/text"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+                <TextView style="@style/Label" android:text="@string/label_server" />
+                <TextView android:id="@+id/server_status" style="@style/Value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+                <TextView style="@style/Label" android:text="@string/label_address" />
+                <TextView android:id="@+id/address" style="@style/Value"
+                    android:fontFamily="monospace" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+                <TextView style="@style/Label" android:text="@string/label_accessibility" />
+                <TextView android:id="@+id/accessibility_status" style="@style/Value" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp">
+                <TextView style="@style/Label" android:text="@string/label_sessions" />
+                <TextView android:id="@+id/session_count" style="@style/Value" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/toggle_server"
+                style="@style/TvButton"
+                android:layout_marginTop="20dp"
+                android:text="@string/start_server" />
+
+            <Button
+                android:id="@+id/open_accessibility"
+                style="@style/TvButton"
+                android:text="@string/enable_accessibility" />
+
+            <Button
+                android:id="@+id/open_settings"
+                style="@style/TvButton"
+                android:text="@string/open_settings" />
+
+            <Button
+                android:id="@+id/revoke_all"
+                style="@style/TvButton"
+                android:text="@string/revoke_all" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="@string/security_notice"
+                android:textColor="@color/text_dim"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/surface"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pair_title"
+            android:textColor="@color/text"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/qr"
+            android:layout_width="@dimen/qr_size"
+            android:layout_height="@dimen/qr_size"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@string/pair_title"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/pairing_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.08"
+            android:textColor="@color/accent"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pairing_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/text"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/pairing_expiry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/text_dim"
+            android:textSize="12sp" />
+    </LinearLayout>
+</LinearLayout>
