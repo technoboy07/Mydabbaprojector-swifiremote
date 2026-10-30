@@ -11,6 +11,14 @@ A local Wi-Fi remote for the **TI M2 Smart projector** (Android 7.1.2 / API 25, 
 
 There is no cloud, no account, no analytics, and no internet access required.
 
+## Screenshots
+
+The phone remote in Chrome (portrait, one-handed):
+
+| D-pad | Touchpad | Text entry | Settings | Pairing |
+|:---:|:---:|:---:|:---:|:---:|
+| <img src="docs/screenshots/dpad.png" width="180" alt="D-pad mode with the Right arrow pressed, Back/Home/Options, volume and media controls"> | <img src="docs/screenshots/touchpad.png" width="180" alt="Touchpad mode with scroll strip and Click button"> | <img src="docs/screenshots/keyboard.png" width="180" alt="Text sheet for sending text to the projector's focused field"> | <img src="docs/screenshots/settings.png" width="180" alt="Settings sheet with pointer and scroll speed, tap options, disconnect and stop server"> | <img src="docs/screenshots/pair.png" width="180" alt="Pairing screen with the 16-character code field"> |
+
 ```
  Phone (Chrome)                                 Projector (Android 7.1.2)
  ┌──────────────┐  signed JSON over LAN HTTP   ┌──────────────────────────────────────────┐
